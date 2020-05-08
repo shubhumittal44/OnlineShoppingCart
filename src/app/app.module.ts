@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { LoginComponent } from './login/login.component';
-//import { SignUpComponent } from './sign-up/sign-up.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,12 +14,11 @@ import { MyCartComponent } from './my-cart/my-cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { SelectedProductComponent } from './product-list/selected-product/selected-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import{ AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
-    //LoginComponent,
-    //SignUpComponent,
     DashboardComponent,
     UserProfileComponent,
     HeaderComponent,
@@ -38,7 +35,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
