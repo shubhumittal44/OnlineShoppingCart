@@ -7,13 +7,25 @@ export class AuthService {
 
   constructor() { }
 
-  loggedIn()
-  {
-    return this.getToken().toLowerCase() === 'success' ? true : false;
+  loggedIn() {
+    return this.checkUserId().toLowerCase() !== null ? true : false;
   }
 
-  getToken(){
+  checkUserId() {
     //localStorage.setItem('authToken','fail');
-    return localStorage.getItem('authToken');
+    return localStorage.getItem('userId');
+  }
+
+  getUserId() {
+    let userId = localStorage.getItem('userId');
+    return atob(userId);
+  }
+
+  setAuthDetails(userId) {
+    localStorage.setItem('userId', userId);
+  }
+
+  logoutUser(){
+    localStorage.clear();
   }
 }

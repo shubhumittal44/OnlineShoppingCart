@@ -6,11 +6,13 @@ const routes : Routes = [
     {path : '', component: LoginComponent}
 ];
 
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    declarations: [LoginComponent]
-})
+// @NgModule({
+//     imports: [RouterModule.forChild(routes)],
+//     declarations: [LoginComponent]
+// })
 
-export class LoginRoutingModule{
+// export class LoginRoutingModule{
 
-}
+// }
+
+export const LoginRoutingModule = RouterModule.forChild(routes);

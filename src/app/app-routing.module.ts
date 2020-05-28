@@ -12,10 +12,12 @@ import { LoginModuleModule } from './login-module/login-module.module';
 import { SignUpModuleModule } from './sign-up-module/sign-up-module.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {path: '', loadChildren: () => import('./login-module/login-module.module').then(m => LoginModuleModule)},
   {path: 'SignUp', loadChildren: () => import('./sign-up-module/sign-up-module.module').then(m => SignUpModuleModule)},
+  {path: 'ForgotPassword', component: ForgotPasswordComponent},
   {path: 'home', component: DashboardComponent, canActivate : [AuthGuard]},
   {path: 'profile', component: UserProfileComponent, canActivate : [AuthGuard]},
   {
