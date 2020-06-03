@@ -11,8 +11,6 @@ import { PendingOrdersComponent } from './Orders/my-order-list/pending-orders/pe
 import { CompletedOrdersComponent } from './Orders/my-order-list/completed-orders/completed-orders.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MyCartComponent } from './my-cart/my-cart.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { SelectedProductComponent } from './product-list/selected-product/selected-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import{ AuthGuard } from './auth.guard';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,8 +29,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     CompletedOrdersComponent,
     LogoutComponent,
     MyCartComponent,
-    ProductListComponent,   
-    SelectedProductComponent,
+ 
     PageNotFoundComponent,
     ForgotPasswordComponent
   ],
