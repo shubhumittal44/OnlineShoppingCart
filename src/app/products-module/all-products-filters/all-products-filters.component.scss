@@ -1,0 +1,74 @@
+.main-div-filter{
+    background: #fff;
+    box-shadow: 0 1px 8px 0 rgba(0,0,0,.06);
+    box-sizing: border-box;
+
+    // width: 220px;
+    width: 19.5%;
+    // height: 100vh;
+    float: left;
+    position: relative;
+    border: 1px solid #d3d4d5;
+    
+}
+
+.filter-heading{
+    border-bottom: 1px solid #d3d4d5;
+    color: #141516;
+    // margin: 0 -10px;
+    height: auto;
+    padding: 15px 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: Oswald,sans-serif;
+    text-transform: capitalize;
+    font-size: 18px;
+    font-weight: 400;
+    background: #f4f4f4;
+}
+
+.resetBtn{
+    color: #929495;
+    font-size: 12px;
+    font-family: Roboto,sans-serif;
+    float: right;
+    cursor: pointer;
+}
+
+
+.price-filter{
+    padding: 0 10px;
+}
+
+.heading-price{
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: 15px;
+    display: block;
+    line-height: 1em;
+    padding: 15px 0;
+}
+
+.price-check-box{
+    margin-left: 30px;
+    font-family: Roboto,sans-serif;
+    color: #212121;
+    // font-size: 13px;
+}
+
+.custom-checkbox{
+    font-size: 13px;
+     line-height: 23px;
+}
+
+
+.clrBtn{
+    cursor: pointer;
+    text-transform: capitalize;
+    float: right;
+    color: #929495;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+}
