@@ -1,53 +1,128 @@
 <main class="d-flex align-items-center min-vh-100 py-3 py-md-0">
-    <div class="container">
-      <div class="card login-card">
-        <div class="row no-gutters">
-            <div class="col-md-5">
-                <div class="card-body">
-                  <div class="brand-wrapper">
-                    <img src="../../../assets/images/logo.svg" alt="logo" class="logo">
-                  </div>
-                  <p class="login-card-description">Create your account</p>
-                  <form action="#!">
-                    <div class="form-group  ">
-                        <label for="password" class="sr-only">User name</label>
-                        <input type="text" name="username"   class="form-control" placeholder="User name">
-                      </div>
-                      <div class="form-group">
-                        <label for="email" class="sr-only">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="Email address">
-                      </div>
-                      <div class="form-group">
-                        <label for="email" class="sr-only">Gender</label>
-                        <input type="text" name="gender" id="email" class="form-control" placeholder="Gender">
-                      </div>
-                      <div class="form-group">
-                        <label for="email" class="sr-only">Age</label>
-                        <input type="number" name="name" id="email" class="form-control" placeholder="Age">
-                      </div>
-                      <div class="form-group">
-                        <label for="password" class="sr-only">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="***********">
-                      </div>
-                    
-                      <div class="form-group">
-                        <label for="password" class="sr-only">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="***********">
-                      </div>
-                      <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Sign up">
-                    </form>
-                    <a href="#!" class="forgot-password-link">Forgot password?</a>
-                    <p class="login-card-footer-text">Already have an account? <a href="#!" class="text-reset">Login here</a></p>
-                   
+  <div class="container">
+    <div class="card login-card">
+      <div class="row no-gutters">
+        <div class="col-md-5">
+          <div class="card-body">
+            <div class="brand-wrapper">
+              <img src="../../../assets/images/logo.svg" alt="logo" class="logo">
+            </div>
+            <p class="login-card-description">Create your account</p>
+            <form class="form" [formGroup]='registrationForm'>
+              <div class="form-group">
+                <label for="password" class="sr-only">User name<span class="error">*</span></label>
+                <input type="text" formControlName="userName" class="form-control"
+                  placeholder="User name" >
+                   <span *ngIf = 'showEditBtn' (click) = 'on_EditUserName()' class="badge badge-info cursor">Edit</span>
+                <span class="error"
+                  *ngIf='!registrationForm.get("userName").valid && registrationForm.get("userName").touched'>
+                  <span *ngIf='registrationForm.get("userName").errors?.required'>
+                    UserName is required
+                  </span>
+                  <span class="error" *ngIf='registrationForm.get("userName").errors?.minlength'>
+                    UserName must be at least 5 characters long
+                  </span>
+                </span>
+              </div>
+              <div class="form-group">
+                <button
+                [ngClass]="{'custom_btn': registrationForm.get('userName').valid, 'disabledCustom_Btn' : !registrationForm.get('userName').valid }"
+                 *ngIf='isUserNameVerfyingBtn' type="button" [disabled]='!registrationForm.get("userName").valid'
+                  (click)='verifyUserName()'>Verify</button>
+              </div>
+
+              <!-- *ngIf='isUserNameVerified' -->
+<!--*ngIf = "showSuggestedUserName"-->
+              <div style="width: 100%" class="form-group dummy" *ngIf = "showSuggestedUserName">
+                <div
+                [ngClass]="{'greenBg':sugUserName.selected ,'noBg':!sugUserName.selected}"
+                class="innerBoxes"  *ngFor = 'let sugUserName of suggestUserNameArray' (click) = 'bindInputWithSuggestedUserName(sugUserName)'>
+                  {{sugUserName.suggestedName}}
                 </div>
               </div>
-          <div class="col-md-7">
-            <img src="../../../assets/images/shopping.jpg" alt="login" class="login-card-img">
+
+
+              <div *ngIf='isUserNameVerified'>
+                <div class="form-group">
+                  <label for="email" class="sr-only">Email<span class="error">*</span></label>
+                  <input type="email" formControlName="email" id="email" class="form-control"
+                    placeholder="Email address">
+                  <span class="error"
+                    *ngIf='!registrationForm.get("email").valid && registrationForm.get("email").touched'>
+                    Email ID is required
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="sr-only">Gender<span class="error">*</span></label>
+                  <input type="text" formControlName="gender" id="email" class="form-control" placeholder="Gender">
+                  <span class="error"
+                    *ngIf='(!registrationForm.get("gender").valid && registrationForm.get("gender").touched) || 
+                    registrationForm.get("gender").errors?.noWhiteSpaceValidator'>
+                    Gender is required
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="sr-only">Age<span class="error">*</span></label>
+                  <input type="number" formControlName="age" id="email" class="form-control" minlength="2" maxlength="2"
+                    placeholder="Age">
+                  <span class="error" *ngIf='!registrationForm.get("age").valid && registrationForm.get("age").touched'>
+                    <span *ngIf='registrationForm.get("age").errors?.required'>
+                      Age is required
+                    </span>
+                    <span *ngIf = 'registrationForm.get("age").errors?.ageError'>
+                      Age should be greater than or equal to 10
+                    </span>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="sr-only">Password<span class="error">*</span></label>
+                  <input type="password" formControlName="password" id="password" class="form-control"
+                    placeholder="***********">
+                  <span class="error"
+                    *ngIf='!registrationForm.get("password").valid && registrationForm.get("password").touched'>
+                    Password is required
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="password" class="sr-only">Confirm Password<span class="error">*</span></label>
+                  <input type="password" formControlName="cpassword" id="password" class="form-control"
+                    placeholder="***********">
+                  <span class="error"
+                    *ngIf='!registrationForm.get("cpassword").valid && registrationForm.get("cpassword").touched'>
+                    <span *ngIf='registrationForm.get("cpassword").errors?.required'>
+                      Confirm Password is required
+                    </span>
+                    <span *ngIf="registrationForm.controls.cpassword.errors?.MatchPassword">
+                      Password and ConfirmPassword should be same
+                    </span>
+                  </span>
+                </div>
+                <!-- <input name="login" id="login" class="btn btn-block login-btn mb-4" [disabled] = "!registrationForm.valid" type="button" value="Sign up"> -->
+                <button type="button" (click)="on_Register()" [disabled]="!registrationForm.valid" name="login" id="login"
+                  class="btn btn-block login-btn mb-4">Sign up</button>
+              </div>
+
+            </form>
+            <div *ngIf='!isUserNameVerified' class="form-group">
+              <br>
+              <br>
+              <br>
+              <br>
+              <br>
+            </div>
+            <a href="#!" class="forgot-password-link" routerLink="/ForgotPassword">Forgot password?</a>
+            <p class="login-card-footer-text">Already have an account? <a href="#!" class="text-reset"
+                routerLink="/">Login here</a></p>
+
           </div>
-         
         </div>
+        <div class="col-md-7">
+          <img src="../../../assets/images/shopping.jpg" alt="login" class="login-card-img">
+        </div>
+
       </div>
-      <!-- <div class="card login-card">
+    </div>
+    <!-- <div class="card login-card">
         <img src="assets/images/login.jpg" alt="login" class="login-card-img">
         <div class="card-body">
           <h2 class="login-card-title">Login</h2>
@@ -65,7 +140,7 @@
               <div class="custom-control custom-checkbox login-card-check-box">
                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                 <label class="custom-control-label" for="customCheck1">Remember me</label>
-              </div>              
+              </div>
               <a href="#!" class="text-reset">Forgot password?</a>
             </div>
             <input name="login" id="login" class="btn btn-block login-btn mb-4" type="button" value="Login">
@@ -73,5 +148,8 @@
           <p class="login-card-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>
         </div>
       </div> -->
-    </div>
-  </main>
+  </div>
+</main>
+
+<!-- 
+  [disabled] = 'isUserNameVerified' -->

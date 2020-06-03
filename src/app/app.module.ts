@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -15,6 +15,10 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { SelectedProductComponent } from './product-list/selected-product/selected-product.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import{ AuthGuard } from './auth.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+// import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,13 +31,22 @@ import{ AuthGuard } from './auth.guard';
     CompletedOrdersComponent,
     LogoutComponent,
     MyCartComponent,
-    ProductListComponent,
+    ProductListComponent,   
     SelectedProductComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-center',
+      preventDuplicates: true
+    })
+    // ReactiveFormsModule,
+    // FormsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

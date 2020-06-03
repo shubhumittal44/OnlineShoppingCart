@@ -13,26 +13,28 @@ import { SignUpModuleModule } from './sign-up-module/sign-up-module.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
 import { productsModuleModule } from './products-module/products-module.module';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
-  {path: '', loadChildren: () => import('./login-module/login-module.module').then(m => LoginModuleModule)},
-  {path: 'SignUp', loadChildren: () => import('./sign-up-module/sign-up-module.module').then(m => SignUpModuleModule)},
-  {path: 'products', loadChildren: () => import('./products-module/products-module.module').then(m => productsModuleModule)},
-  {path: 'home', component: DashboardComponent},
-   {path: 'profile', component: UserProfileComponent, canActivate : [AuthGuard]},
+  { path: '', loadChildren: () => import('./login-module/login-module.module').then(m => LoginModuleModule) },
+  { path: 'SignUp', loadChildren: () => import('./sign-up-module/sign-up-module.module').then(m => SignUpModuleModule) },
+  { path: 'products', loadChildren: () => import('./products-module/products-module.module').then(m => productsModuleModule) },
+  { path: 'home', component: DashboardComponent },
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'ForgotPassword', component: ForgotPasswordComponent },
   {
-    path: 'MyOrders', 
+    path: 'MyOrders',
     component: MyOrderListComponent,
     children: [
-      {path: 'pending/:name', component: PendingOrdersComponent},
-      {path: 'delivered/:name', component: CompletedOrdersComponent}
+      { path: 'pending/:name', component: PendingOrdersComponent },
+      { path: 'delivered/:name', component: CompletedOrdersComponent }
     ],
-    canActivate : [AuthGuard]
+    canActivate: [AuthGuard]
   },
-  {path: 'logout', component: LogoutComponent},
-  {path: 'myCart', component: MyCartComponent, canActivate : [AuthGuard]},
-  {path: 'product/:name', component: SelectedProductComponent, canActivate : [AuthGuard]},
-  {path: '**', component: PageNotFoundComponent}
+  { path: 'logout', component: LogoutComponent },
+  { path: 'myCart', component: MyCartComponent, canActivate: [AuthGuard] },
+  { path: 'product/:name', component: SelectedProductComponent, canActivate: [AuthGuard] },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

@@ -1,12 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SignUpRoutingModule } from './signUp-routing.module';
+import {  signUpRoutingModule } from './signUp-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ColorChangingDirective } from '../directives/color-changing.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [SignUpComponent,
+    ColorChangingDirective
+  ],
   imports: [
     CommonModule,
-    SignUpRoutingModule
+    signUpRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
+  // exports:[
+  //   FormsModule,
+  //   ReactiveFormsModule
+  // ]
 })
 export class SignUpModuleModule { }

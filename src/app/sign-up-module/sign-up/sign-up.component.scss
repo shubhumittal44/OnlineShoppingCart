@@ -6,6 +6,23 @@
     }
 }
 
+.greenBg{
+    background: green;
+}
+
+.greyBg{
+background: grey;
+}
+.dummy div.noBg:hover{
+background: grey;
+}
+.noBg{
+background:white;
+}
+.cursor{
+cursor: pointer;
+}
+
 .login-card {
     border: 0;
     border-radius: 27.5px;
@@ -54,6 +71,19 @@
         }
     }
 
+    .innerBoxes{
+        cursor: pointer;
+        border-radius: 10px;
+        font-size:13px;
+        border: 1px solid grey;
+         box-shadow: -2px 2px 5px 0px #888888;
+        // margin: 5px 0px 5px 10px;
+        margin-right: 10px;
+        padding: 4px 15px 4px 15px;
+        margin-bottom: 10px;
+        float: left;
+    }
+
     .login-btn {
         padding: 13px 20px 12px;
         background-color: #000;
@@ -77,6 +107,10 @@
         margin-bottom: 12px;
     }
 
+    .error{
+        color: red;
+    }
+
     &-footer-text {
         font-size: 16px;
         color: #0d2366;
@@ -94,4 +128,17 @@
             color: #919aa3;
         }
     }
+}
+
+.custom_btn{
+    border-radius: 8px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #28a745;
+}
+
+.disabledCustom_Btn{
+    border-radius: 8px;
+    font-size: 14px;
+   
 }
