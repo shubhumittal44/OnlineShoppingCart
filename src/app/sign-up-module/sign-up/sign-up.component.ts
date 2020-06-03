@@ -65,63 +65,53 @@ export class SignUpComponent implements OnInit {
   }
 
   getTitle(value) {
-    //value 0 for warning 
-    // value 1 for error
     if (value == 0) {
-      return EnumWarningRegistrationApi.title
+      return EnumWarningRegistrationApi.title //value 0 for warning 
     }
-    else {
-      return EnumFailureRegisterationApi.title;
-
+    else if(value == 1) {
+      return EnumFailureRegisterationApi.title; // value 1 for error
+    }
+    else{
+      return EnumSuccessRegistrationApi.title; //value 2 for Success
     }
   }
 
   userNameAuthApiCall(userData) {
 
-    // naming convention
-    //separete method for api 
-
     if (userData.userName !== this.suggestUserNameStr) {
       this.suggestUserNameStr = userData.userName;
       if (userData.userName != null) {
-        this.authenticateService.check_ValidUserName(userData).subscribe((res: any) => {
-          if (res.status == 'success') {
-            let successObj = {
-              title: EnumSuccessRegistrationApi.title,
-              body: EnumSuccessRegistrationApi.userNameVerified
-            }
-            this.successToaster(successObj);
-            this.isUserNameVerified = true;
-            this.isUserNameVerfyingBtn = false;
-            //this.showSuggestionBtn = false;
-            this.showSuggestedUserName = false;
-            //this.userNameRef.nativeElement.disabled =true;
-            this.toggleUserNameFeild(false);
-            this.showEditBtn = true;
-          }
-        }, (err: any) => {
-
-          this.verifyUserApiCallErrorHandler(err.error)
-        })
+        this.userNameVerificationApiCall(userData);
       }
       else {
-        let obj = {
-          title: this.getTitle(1),
-          body: EnumFailureRegisterationApi.enterUserName
-        }
+        const obj = this.getErrorPayload(1, 'enterUserName');
         this.errorToaster(obj);
       }
     }
     else {
-      let warningObj = {
-        title: this.getTitle(0),
-        body: EnumWarningRegistrationApi.sameUserName
-      }
-
+      const warningObj = this.getErrorPayload(0, 'sameUserName')
       this.warningToaster(warningObj);
     }
   }
 
+  userNameVerificationApiCall(userData){
+    this.authenticateService.check_ValidUserName(userData).subscribe((res: any) => {
+      if (res.status == 'success') {
+        const successObj = this.getErrorPayload(2, 'userNameVerified')
+        this.successToaster(successObj);
+        this.isUserNameVerified = true;
+        this.isUserNameVerfyingBtn = false;
+        //this.showSuggestionBtn = false;
+        this.showSuggestedUserName = false;
+        //this.userNameRef.nativeElement.disabled =true;
+        this.toggleUserNameFeild(false);
+        this.showEditBtn = true;
+      }
+    }, (err: any) => {
+
+      this.verifyUserApiCallErrorHandler(err.error)
+    })
+  }
 
   getUserName() {
     return this.registrationForm.get('userName').value;
@@ -135,44 +125,41 @@ export class SignUpComponent implements OnInit {
   }
 
 
-  // getErrorPayload(title, body) {
-
-  //   let errorObj = {
-  //     title: this.getTitle(title),
-  //     body: this.getBody(body)
-  //     EnumFailureRegisterationApi.alreadyExist
-  //   }
-  //   return errorObj;
-  // }
+  getErrorPayload(title, body) {
+    let errorObj = {
+      title: this.getTitle(title),
+      body: this.getBody(body)
+    }
+    return errorObj;
+  }
 
 
-  // getBody(key) {
-  //   switch (key) {
-  //     case 'aleradyEsit':
-  //       return EnumFailureRegisterationApi.alreadyExist
-  //     case value:
-
-  //       break;
-  //     case value:
-
-  //       break;
-  //     case value:
-
-  //       break;
-
-  //     default:
-  //       break;
-  //   }
-  // }
+  getBody(key) {
+    switch (key) {
+      case 'alreadyExist':
+        return EnumFailureRegisterationApi.alreadyExist;
+      case 'apiFailed':
+        return EnumFailureRegisterationApi.apiFailed;
+      case 'validationError':
+        return EnumFailureRegisterationApi.validationError;
+      case 'enterUserName':
+        return EnumFailureRegisterationApi.enterUserName;
+      case 'userNameVerified' :
+        return EnumSuccessRegistrationApi.userNameVerified;
+      case 'sameUserName':
+        return EnumWarningRegistrationApi.sameUserName;
+      case 'registered':
+        return EnumSuccessRegistrationApi.registered;
+      default:
+        break;
+    }
+  }
 
 
 
   verifyUserApiCallErrorHandler(error) {
-    if (error.message.toLowerCase == EnumFailureRegisterationApi.alreadyExist.toLowerCase) {
-      let errorObj = {
-        title: this.getTitle(1),
-        body: EnumFailureRegisterationApi.alreadyExist
-      }
+    if (error.message.toLowerCase == this.getBody('alreadyExist').toLowerCase) {
+      const errorObj = this.getErrorPayload(1, 'alreadyExist')
       this.errorToaster(errorObj);
       if (this.count > 0) {
         if (this.count >= 3) {
@@ -184,17 +171,14 @@ export class SignUpComponent implements OnInit {
       }
     }
     else {
-      let errorObj = {
-        title: this.getTitle(1),
-        body: EnumFailureRegisterationApi.apiFailed
-      }
+      const errorObj = this.getErrorPayload(1, 'apiFailed')
       this.errorToaster(errorObj);
     }
   }
 
   showUserNameSuggestions(formValue) {
-    if (formValue.username != '' && formValue.username != undefined) {
-      this.createUserName(formValue.username);
+    if (formValue.userName != '' && formValue.userName != undefined) {
+      this.createUserName(formValue.userName);
     }
     else {
       this.createUserName(this.suggestUserNameStr);
@@ -223,7 +207,7 @@ export class SignUpComponent implements OnInit {
     value.selected = true;
 
     this.registrationForm.patchValue({
-      username: value.suggestedName
+      userName: value.suggestedName
     })
   }
 
@@ -232,11 +216,9 @@ export class SignUpComponent implements OnInit {
 
     if (value) {
       this.registrationForm.controls['userName'].enable();
-
     }
     else {
       this.registrationForm.controls['userName'].disable();
-
     }
 
   }
@@ -252,10 +234,7 @@ export class SignUpComponent implements OnInit {
   registerApiCall(registrationData) {
     this.authenticateService.get_registration(registrationData).subscribe((res: any) => {
       if (res.status == "success") {
-        let successObj = {
-          title: EnumSuccessRegistrationApi.title,
-          body: EnumSuccessRegistrationApi.registered
-        }
+        const successObj = this.getErrorPayload(2, 'registered')
         this.successToaster(successObj);
 
         //remove//
@@ -270,18 +249,12 @@ export class SignUpComponent implements OnInit {
       }
       if (res.status == "error") {
         if (res.message.name = "ValidationError") {
-          let validationErrorObj = {
-            title: this.getTitle(1),
-            body: EnumFailureRegisterationApi.validationError
-          }
+          const validationErrorObj = this.getErrorPayload(1, 'validationError')
           this.errorToaster(validationErrorObj);
         }
       }
     }, (err: any) => {
-      let errorObj = {
-        title: this.getTitle(1),
-        body: EnumFailureRegisterationApi.apiFailed
-      }
+      const errorObj = this.getErrorPayload(1, 'apiFailed')
       this.errorToaster(errorObj);
     });
   }
