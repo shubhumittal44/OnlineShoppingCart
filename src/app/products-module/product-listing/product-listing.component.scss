@@ -1,8 +1,279 @@
 .main-listing-class{
+  margin-bottom: 10px;
    width: 80%;
     float: right;
 //   height: calc(100vh - 102px);
+  margin-top: 21px;
   position: relative;
   background: #fff;
   box-shadow: 0 1px 8px 0 rgba(0,0,0,.06);
+  // padding: 10px;
+}
+
+
+.inputWidth{
+  width: 50% !important;
+  display: inline-block !important;
+}
+
+.custom_Btn{
+  position: relative;
+  top: -1px;
+  right: 73px;
+  border-radius: 0px;
+  background: #17a2b8;
+  color: white;
+  font-weight: 600;
+}
+
+.result-count{
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.firstIdex{
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 10px 4px 0;
+}
+
+.extraPadding{
+  cursor: pointer;
+  // margin-right: 6px;
+  font-size: 14px;
+  // padding: 8px 10px 4px 0;
+  padding: 8px 0 4px;
+  margin: 0 10px;
+}
+
+.sorting-class{
+  margin-top: 7px;
+}
+
+.active-selected-sort{
+  
+  border-bottom: 2px solid #2874f0;;
+  font-weight: bold;
+  color: #2874f0;;
+}
+
+.upper-block{
+  border-bottom: 1px solid #f0f0f0; 
+  padding: 10px 0px 3px 10px;
+}
+
+.product-listing-div{
+  display: flex !important;
+  display: -webkit-flex !important;
+  line-height: 1;
+    padding: 24px 0 30px 24px;
+    display: block;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.image-div{
+  position: relative;
+    width: 200px;
+}
+
+.right-div{
+  display: flex !important;
+  display: -webkit-flex !important;
+    width: calc(100% - 200px);
+    padding-left: 25px;
+}
+
+.img-cls{
+  position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto;
+    opacity: 1;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.right-1{
+  width: 58.33%;
+}
+.right-2{
+  width: 41.66%;
+  padding-left: 25px;
+}
+
+.pricing-Div{
+  font-weight: bold;
+  font-size: 25px;
+    display: block;
+  display: inline-block;
+    margin-top: -1px;
+    padding-right: 10px;
+}
+
+
+.heading-right-1{
+  font-weight: 600;
+  font-size: 17px;
+  display: block; 
+  cursor: pointer;
+}
+
+.below-heading{
+  margin-top: 6px;
+}
+
+.main-content-right-1{
+  margin-top: 13px;
+}
+
+.rating{
+  position: relative;
+}  
+
+.reviews{
+  font-size: 13.5px;
+  padding-left: 8px;
+    font-weight: 600;
+    color: #878787;
+}
+
+.rating-inside{
+  line-height: normal;
+    display: inline-block;
+    color: #fff;
+    padding: 2px 4px 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 12px;
+    vertical-align: middle;
+    background-color: #388e3c;
+}
+
+.star-image{
+  margin: -3px 0 0 2px;
+    height: 10px;
+}
+
+.ul-listing{
+  font-size: 14px;
+  margin-top: 5px;
+    color: #212121;
+    line-height: 22px;
+    display: table;
+}
+
+
+ul li:before{
+  content: "\2022";
+  color: #c2c2c2;
+  padding-right: 8px;
+  display: table-cell;
+}
+.li-listing{
+  
+  display: table-row;
+  padding-right: 8px;
+}
+
+.bounce {
+  position:fixed;
+  right:3%;
+  bottom:5%;
+  margin-top:-25px;
+  margin-left:-25px;
+  height:50px;
+  width:50px;
+  background: green;
+  -webkit-animation:bounce 1s infinite;
+  z-index: 99999;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+@-webkit-keyframes bounce {
+  0%       { bottom:5px; }
+  25%, 75% { bottom:15px; }
+  50%      { bottom:20px; }
+  100%     {bottom:0;}
+}
+
+
+.pagination{
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px;
+  line-height: 32px;
+  font-size: 14px !important;
+}
+
+.pageNumber{
+  font-size: 14px;
+}
+
+.nav-number{
+  margin-right: 10%;
+  padding: 4px 0;
+  text-align: center;
+  font-weight: 500;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.next-cls{
+  display: -webkit-flex;
+  text-align: center;
+  font-weight: 600;
+  display: inline-block;
+  line-height: 32px;
+  color: #2874f0;
+  padding: 0 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.previous-cls{
+  display: -webkit-flex;
+  text-align: center;
+  font-weight: 600;
+  display: inline-block;
+  line-height: 32px;
+  color: #2874f0;
+  padding: 0 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.inner-number-page{
+  display: inline-block;
+  padding: 0 8px;
+  cursor: pointer;
+  line-height: 32px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 600;
+}
+
+.last-span{
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+}
+
+.inner-number-active{
+  background: #2874f0;
+    color: #fff;
 }

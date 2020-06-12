@@ -6,16 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent implements OnInit {
-hi =[];
-  constructor() { }
+ constructor() {
+
+  }
 
   ngOnInit() {
-
-    setTimeout(() => {
-      for (let i = 0; i < 8; i++) {
-         this.hi.push(i);
-      }
-    }, 500);
-  }
+}
 
 }
