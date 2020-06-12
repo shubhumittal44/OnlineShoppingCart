@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ShowingHeaderServiceService } from '../core-services/showing-header-service.service';
+import { Router, NavigationStart } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private  showingHeader :ShowingHeaderServiceService, public route : Router) { }
 
   ngOnInit() {
   }

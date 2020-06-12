@@ -13,12 +13,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthGuard } from './auth.guard';
 import { productsModuleModule } from './products-module/products-module.module';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LoginAuthGuard } from './core-services/login-AuthGuard';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./login-module/login-module.module').then(m => LoginModuleModule) },
-  { path: 'SignUp', loadChildren: () => import('./sign-up-module/sign-up-module.module').then(m => SignUpModuleModule) },
+  { path: '',redirectTo: 'home', pathMatch: "full"},
+  // study what is path match full stratwefy to find route in ngular  also there are more than 1 stratergy
+
+  { path: 'login', loadChildren: () => import('./login-module/login-module.module').then(m => LoginModuleModule), canActivate : [LoginAuthGuard] },
+  { path: 'SignUp', loadChildren: () => import('./sign-up-module/sign-up-module.module').then(m => SignUpModuleModule), canActivate : [LoginAuthGuard] },
   { path: 'products', loadChildren: () => import('./products-module/products-module.module').then(m => productsModuleModule) },
-  { path: 'home', component: DashboardComponent },
+  { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'ForgotPassword', component: ForgotPasswordComponent },
   {

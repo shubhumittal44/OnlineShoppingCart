@@ -8,7 +8,7 @@ export class AuthService {
   constructor() { }
 
   loggedIn() {
-    return this.checkUserId().toLowerCase() !== null ? true : false;
+    return this.checkUserId() !== null ? true : false;
   }
 
   checkUserId() {

@@ -2,13 +2,16 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { AuthenticationApiServiceService } from 'src/app/core-services/authentication-api-service.service';
 import { ToasterService } from 'src/app/core-services/toaster.service';
-import { EnumFailureRegisterationApi } from 'src/hardcoded-Strings/failure.enum';
-import { EnumSuccessRegistrationApi } from 'src/hardcoded-Strings/success.enum';
+import { EnumFailureRegisterationApi, EnumFailure, EnumFailureLoginApi } from 'src/hardcoded-Strings/failure.enum';
+import { EnumSuccessRegistrationApi, EnumSuccess } from 'src/hardcoded-Strings/success.enum';
 import { EnumWarningRegistrationApi } from 'src/hardcoded-Strings/warning.enum';
 import { PasswordValidation } from 'src/app/custom-validation/PasswordValidation';
 import { RegistrationApiFields } from 'src/app/models/registration-model.model';
 import { NoWhiteSpaceValidator } from 'src/app/custom-validation/SpaceValidation';
 import { AgeValidator } from 'src/app/custom-validation/AgeValidation';
+import { ShowingHeaderServiceService } from 'src/app/core-services/showing-header-service.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -31,7 +34,13 @@ export class SignUpComponent implements OnInit {
   //registrationData : RegistrationApiFields;
   usernameDisabled: boolean = false;
 
-  constructor(public formBuilder: FormBuilder, public authenticateService: AuthenticationApiServiceService, public tosterService: ToasterService) { }
+  constructor(
+    public formBuilder: FormBuilder,
+    public authenticateService: AuthenticationApiServiceService, 
+    public tosterService: ToasterService,
+    private showingHeader : ShowingHeaderServiceService,
+    private route : Router,
+    private authService : AuthService) { }
 
 
   ngOnInit(): void {
@@ -231,20 +240,30 @@ export class SignUpComponent implements OnInit {
     this.suggestUserNameStr = "";
   }
 
+  deleteUnWantedField(data){
+    const refactorData = data;
+    delete refactorData.email;
+    delete refactorData.gender;
+    delete refactorData.age;
+    return refactorData;
+  }
+
   registerApiCall(registrationData) {
     this.authenticateService.get_registration(registrationData).subscribe((res: any) => {
       if (res.status == "success") {
-        const successObj = this.getErrorPayload(2, 'registered')
-        this.successToaster(successObj);
-
+        // const successObj = this.getErrorPayload(2, 'registered')
+        // this.successToaster(successObj);
+        const loginData = this.deleteUnWantedField(registrationData);
+        this.loginApiCall(loginData);
+        //this.showingHeader.showingHeader.next(true);
         //remove//
-        this.registrationForm.reset();
-        this.showEditBtn = false;
-        this.isUserNameVerified = false;
-        this.isUserNameVerfyingBtn = true;
-        this.suggestUserNameStr = "";
-        this.count = 1;
-        this.toggleUserNameFeild(true);
+        // this.registrationForm.reset();
+        // this.showEditBtn = false;
+        // this.isUserNameVerified = false;
+        // this.isUserNameVerfyingBtn = true;
+        // this.suggestUserNameStr = "";
+        // this.count = 1;
+        // this.toggleUserNameFeild(true);
         //rmove//
       }
       if (res.status == "error") {
@@ -260,10 +279,46 @@ export class SignUpComponent implements OnInit {
   }
 
   on_Register() {
-
     const singUpValue = this.registrationForm.getRawValue();
     delete singUpValue.cpassword;
     this.registerApiCall(singUpValue);
+  }
+
+  loginApiCall(loginDetails) {
+    this.authenticateService.get_Login(loginDetails).subscribe((res: any) => {
+      console.log(res);
+      if (res.status === EnumSuccess.statusSuccess) {
+        const userId = btoa(res._id);
+        this.authService.setAuthDetails(userId);
+        //this.showingHeader.showingHeader.next(true);
+        this.route.navigate(['/home'], { replaceUrl: true });
+      }
+    }, err => {
+      const apiError = err.error;
+      this.apiVallErrorhandler(apiError);
+    })
+  }
+
+  apiVallErrorhandler(error) {
+    if (error.status === EnumFailure.statusFailed) {
+      let err;
+      switch (error.message) {
+        case 'Invalid Password':
+          err = EnumFailureLoginApi.InvalidPassword;
+          break;
+        case 'Bad Request':
+          err = EnumFailureLoginApi.BadRequest;
+          break;
+        case 'User Not Found':
+          err = EnumFailureLoginApi.UserNotFound;
+          break;
+      }
+      const toasterMsg = {
+        title: "Error",
+        body: err
+      }
+      this.errorToaster(toasterMsg);
+    }
   }
 
 }

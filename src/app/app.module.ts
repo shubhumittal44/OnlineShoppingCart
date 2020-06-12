@@ -16,6 +16,7 @@ import{ AuthGuard } from './auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { LoginAuthGuard } from './core-services/login-AuthGuard';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -45,7 +46,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     // ReactiveFormsModule,
     // FormsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, LoginAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

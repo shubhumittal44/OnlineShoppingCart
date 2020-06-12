@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiEndpoints } from '../constants/endPoints';
 
-const service_Url = 'http://53dc57f99e21.ngrok.io/';
+const service_Url = 'http://localhost:3000/';
 
 @Injectable({
   providedIn: 'root'

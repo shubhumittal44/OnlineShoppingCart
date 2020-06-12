@@ -8,6 +8,7 @@ import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { loginField } from 'src/app/models/login-model.moel';
 import { ToasterField } from 'src/app/models/toaster-model.model';
 import { AuthService } from 'src/app/auth.service';
+import { ShowingHeaderServiceService } from 'src/app/core-services/showing-header-service.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
     private route: Router,
     public toasterService: ToasterService,
     private formBuilder: FormBuilder,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    private showingHeader : ShowingHeaderServiceService) { }
 
   ngOnInit(): void {
     this.initializeForm();
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit {
       if (res.status === EnumSuccess.statusSuccess) {
         const userId = btoa(res._id);
         this.authService.setAuthDetails(userId);
+        //this.showingHeader.showingHeader.next(true);
         this.route.navigate(['/home'], { replaceUrl: true });
       }
     }, err => {
