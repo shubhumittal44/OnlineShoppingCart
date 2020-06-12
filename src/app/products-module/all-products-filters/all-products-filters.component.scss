@@ -1,4 +1,20 @@
+.imgClass{
+    width: 100%;
+    object-fit: cover;
+ }
+ 
+ .bannerDiv{
+    position: absolute;
+    top: -105px;
+    //  width: 19.5%;
+    // margin: 30px 0px 30px 0px;
+ }
+
 .main-div-filter{
+
+    margin-top: 125px;
+
+
     background: #fff;
     box-shadow: 0 1px 8px 0 rgba(0,0,0,.06);
     box-sizing: border-box;
@@ -13,8 +29,12 @@
 }
 
 .filter-heading{
-    border-bottom: 1px solid #d3d4d5;
-    color: #141516;
+    // border-bottom: 1px solid #d3d4d5;
+    // color: #141516;
+    // background: #f4f4f4;
+    border-bottom: 1px solid #051c42;  
+    color: white;
+    background: #051c42;
     // margin: 0 -10px;
     height: auto;
     padding: 15px 20px;
@@ -24,7 +44,8 @@
     text-transform: capitalize;
     font-size: 18px;
     font-weight: 400;
-    background: #f4f4f4;
+  
+   
 }
 
 .resetBtn{
@@ -72,3 +93,4 @@
     line-height: 1;
     font-weight: 400;
 }
+
