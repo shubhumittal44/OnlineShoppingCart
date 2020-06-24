@@ -7,7 +7,7 @@ export class apiEndpoints {
     };
 
     static apiUrl = {
-        url : 'http://localhost:3000/'
+        url : 'http://1a2474b39b18.ngrok.io/'
     }
 
 }
