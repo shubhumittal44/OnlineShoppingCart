@@ -2,7 +2,8 @@ export enum EnumFailure{
     InvalidPassword = 'Please enter your correct password',
     BadRequest = 'Something went wrong, Please try again later',
     UserNotFound = 'Please enter your correct username',
-    statusFailed = 'failed'
+    statusFailed = 'failed',
+    apiFailed = 'error'
 }
 
 export enum EnumFailureLoginApi{

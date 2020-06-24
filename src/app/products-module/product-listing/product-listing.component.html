@@ -10,7 +10,8 @@
         </div>
 
         <div class="result-count">
-            Showing 1 – 40 of 28,28,933 results for "All Mobiles"
+            <!-- Showing 1 – 40 of 28,28,933 results for "All Mobiles" -->
+            Showing 1 – {{totalPages}} of {{totalProducts}} results for "All Mobiles"
         </div>
 
         <div class="sorting-class">
@@ -23,14 +24,16 @@
         </div>
     </div>
 
-    <div class="product-listing-div">
+    <div class="product-listing-div"  *ngFor = 'let product of productsOnPageList'>
         <div class="image-div">
             <div style="position: relative;
             display: block;">
                 <div style="height: 200px;
                 width: 200px;">
-                    <img class="img-cls"
-                        src="https://rukminim1.flixcart.com/image/312/312/k8ddoy80/mobile/u/g/w/realme-narzo-10a-rmx2020-original-imafqechxsprgfgr.jpeg?q=70">
+                    <!-- <img class="img-cls"
+                        src="https://rukminim1.flixcart.com/image/312/312/k8ddoy80/mobile/u/g/w/realme-narzo-10a-rmx2020-original-imafqechxsprgfgr.jpeg?q=70"> -->
+                        <img class="img-cls"
+                        src="{{product.productUrl}}"/>
                 </div>
             </div>
         </div>
@@ -38,7 +41,8 @@
         <div class="right-div">
             <div class="right-1">
                 <div class="heading-right-1">
-                    Realme Narzo 10A (So White, 32 GB)
+                    <!-- Realme Narzo 10A (So White, 32 GB) -->
+                    {{product.productDesc}}
                 </div>
 
                 <div class="below-heading">
@@ -59,19 +63,24 @@
                 <div class="main-content-right-1">
                     <ul class="ul-listing">
                         <li class="li-listing">
-                            3 GB RAM | 32 GB ROM | Expandable Upto 256 GB
+                            <!-- 3 GB RAM | 32 GB ROM | Expandable Upto 256 GB -->
+                            {{product.mobileRam}} RAM | {{product.mobileStorage}} ROM | Expandable Upto 256 GB
                         </li>
                         <li class="li-listing">
-                            16.56 cm (6.52 inch) HD+ Display
+                            <!-- 16.56 cm (6.52 inch) HD+ Display -->
+                            {{product.mobileScreen}}
                         </li>
                         <li class="li-listing">
-                            12MP + 2MP + 2MP | 5MP Front Camera
+                            <!-- 12MP + 2MP + 2MP | 5MP Front Camera -->
+                            {{product.mobileBackCam}} | {{product.mobileFrontCam}}
                         </li>
                         <li class="li-listing">
-                            5000 mAh Lithium-ion Battery
+                            <!-- 5000 mAh Lithium-ion Battery -->
+                            {{product.mobileBattery}} Lithium-ion Battery
                         </li>
                         <li class="li-listing">
-                            MediaTek Helio G70 (12 nm) Processor
+                            <!-- MediaTek Helio G70 (12 nm) Processor -->
+                            {{product.mobileProcessor}}
                         </li>
 
                         <li class="li-listing">
@@ -84,7 +93,8 @@
             </div>
             <div class="right-2">
                 <div class="pricing-Div">
-                    $5,000
+                    <!-- $5,000 -->
+                    {{product.productPrice}}
                 </div>
             </div>
         </div>
@@ -92,7 +102,7 @@
 
 
     <!-- /////////// ng for remove all///////////////  1-->
-    <div class="product-listing-div">
+    <!-- <div class="product-listing-div">
         <div class="image-div">
             <div style="position: relative;
             display: block;">
@@ -157,9 +167,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 2 -->
-    <div class="product-listing-div">
+    <!-- <div class="product-listing-div">
         <div class="image-div">
             <div style="position: relative;
             display: block;">
@@ -224,9 +234,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 3 -->
-    <div class="product-listing-div">
+    <!-- <div class="product-listing-div">
         <div class="image-div">
             <div style="position: relative;
             display: block;">
@@ -291,9 +301,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- 4 -->
-    <div class="product-listing-div">
+    <!-- <div class="product-listing-div">
         <div class="image-div">
             <div style="position: relative;
             display: block;">
@@ -358,17 +368,20 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="pagination">
-        <span class="pageNumber"> Page 1 of 445 </span>
+        <span class="pageNumber"> Page 1 of {{totalProducts}} </span>
         <nav class="nav-number">
-            <span class="previous-cls">Previous</span>
+            <span class="previous-cls" *ngIf = "showPreviousBtn" (click) = 'prevBtn()'>Previous</span>
 
-            <span class="inner-number-page">
+            <!-- <span class="inner-number-page">
                 1
+            </span> -->
+            <span [ngClass] = "{'inner-number-page' : true, 'inner-number-active' : page.selected}" *ngFor = "let page of paginationNumber" (click) = "onPageNumClick(page)">
+                {{page.value}}
             </span>
-            <span class="inner-number-page inner-number-active">
+            <!-- <span class="inner-number-page inner-number-active">
                 2
             </span>
             <span class="inner-number-page">
@@ -388,9 +401,9 @@
             </span>
             <span class="inner-number-page">
                 8
-            </span>
+            </span> -->
 
-            <span class="next-cls">Next</span>
+            <span class="next-cls" *ngIf = "showNextBtn" (click) = 'nextBtn()'>Next</span>  
         </nav>
 
 
